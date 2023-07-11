@@ -6,16 +6,10 @@ const App = () => {
 	const [randomNumber, setRandomNumber] = useState(null);
 	const [disabled, setDisabled] = useState(true);
 	const generateRandomNumber = () => {
-		const min = 90;
+		const min = 95;
 		const max = 100;
 		const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 		setRandomNumber(randomNum);
-		Toast.show({
-			type: "success",
-			text1: "Wygenerowana liczba",
-			text2: randomNum,
-			visibilityTime: 2000, // Czas widoczności toastu w milisekundach
-		});
 	};
 
 	return (
@@ -64,7 +58,7 @@ const App = () => {
 			</Text>
 			<Button
 				style={{ Bottom: 300 }}
-				title="Generuj liczbę"
+				title="Zrób pomiar"
 				onPress={generateRandomNumber}
 				disabled={disabled}
 			/>
