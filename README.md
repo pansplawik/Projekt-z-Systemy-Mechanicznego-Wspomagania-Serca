@@ -19,3 +19,5 @@
 - następnie `yarn android`
 
 ## Wizualizacja 
+![Połączenie z urządzeniem](wizualizacja/Screenshot_20230711-211225.jpg)
+![Pobieranie danych](wizualizacja/Screenshot_20230711-211232.jpg)
