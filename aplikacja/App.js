@@ -1,21 +1,76 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, Button } from "react-native";
+import Toast from "react-native-toast-message";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => {
+	const [randomNumber, setRandomNumber] = useState(null);
+	const [disabled, setDisabled] = useState(true);
+	const generateRandomNumber = () => {
+		const min = 90;
+		const max = 100;
+		const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+		setRandomNumber(randomNum);
+		Toast.show({
+			type: "success",
+			text1: "Wygenerowana liczba",
+			text2: randomNum,
+			visibilityTime: 2000, // Czas widoczności toastu w milisekundach
+		});
+	};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	return (
+		<View
+			style={{
+				flex: 1,
+				justifyContent: "center",
+				alignItems: "center",
+				backgroundColor: "lightblue",
+			}}
+		>
+			<Text
+				style={{
+					fontSize: 40,
+					marginBottom: 100,
+					marginTop: 10,
+					color: "darkblue",
+					textAlign: "center",
+				}}
+			>
+				Mobilny pulsooksymetr
+			</Text>
+			<Button
+				title="Połącz z urządzeniem"
+				onPress={() => {
+					setDisabled(false)
+					Toast.show({
+						type: "info",
+						text1: "Połączono",
+						visibilityTime: 2000, // Czas widoczności toastu w milisekundach
+					});
+				}}
+			/>
+			<Text
+				style={{
+					fontSize: 17,
+					marginBottom: 20,
+					marginTop: 20,
+					color: "darkblue",
+					textAlign: "center",
+				}}
+			>
+				{randomNumber !== null
+					? randomNumber
+					: "Kliknij przycisk, aby zrobić pomiar"}
+			</Text>
+			<Button
+				style={{ Bottom: 300 }}
+				title="Generuj liczbę"
+				onPress={generateRandomNumber}
+				disabled={disabled}
+			/>
+			<Toast ref={(ref) => Toast.setRef(ref)} />
+		</View>
+	);
+};
+
+export default App;
